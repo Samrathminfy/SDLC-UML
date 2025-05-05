@@ -1,0 +1,20 @@
+@startuml
+actor Customer
+entity ShoppingCart
+entity Order
+entity Payment
+entity Shipment
+
+Customer -> ShoppingCart : add items to cart
+Customer -> ShoppingCart : checkout()
+ShoppingCart -> Order : createOrder()
+Order -> Order : calculateTotal()
+Customer -> Payment : initiatePayment()
+Payment -> Payment : verifyPayment()
+alt payment success
+    Payment -> Shipment : createShipment()
+    Shipment -> Customer : confirm shipment
+else payment failure
+    Payment -> Customer : display error
+end
+@enduml

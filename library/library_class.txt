@@ -1,0 +1,59 @@
+@startuml
+
+' Set black background
+skinparam backgroundColor #5A5A5A
+
+' Set all class-related styles
+skinparam class {
+    BackgroundColor #1e1e1e
+    BorderColor white
+    ArrowColor white
+    FontColor white
+}
+
+' Set styles for notes
+skinparam note {
+    BackgroundColor #1e1e1e
+    BorderColor white
+    FontColor white
+}
+
+' Set global font color for other elements (relationships, inheritance arrows, etc.)
+skinparam defaultFontColor white
+skinparam ArrowColor white
+
+skinparam handwritten false
+skinparam shadowing false
+
+' Classes
+class Book {
+    - title: String
+    - author: String
+    - ISBN: String
+    - isAvailable: Boolean
+}
+
+class Member {
+    - name: String
+    - memberID: String
+    - membershipDate: Date
+    - borrowedBooks: List<Book>
+    + borrowBook(book: Book): void
+    + returnBook(book: Book): void
+}
+
+class Librarian extends Member {
+    + addBook(book: Book): void
+    + registerMember(member: Member): void
+}
+
+' Relationships
+Member o-- Book : borrows
+Librarian --> Book : manages
+
+' Watermark
+note top of Librarian
+  © samrath
+end note
+
+@enduml

@@ -1,0 +1,28 @@
+@startuml
+' Set background and style
+skinparam backgroundColor #5A5A5A
+skinparam defaultFontColor black
+skinparam handwritten false
+skinparam shadowing false
+
+start
+:Customer browses products;
+:Customer adds items to cart;
+:Customer proceeds to checkout;
+if (Inventory available?) then (yes)
+  :Customer makes payment;
+  if (Payment successful?) then (yes)
+    :Order is processed;
+    :Shipment is created;
+    :Shipping in progress;
+    stop
+  else (no)
+    :Display payment error;
+    stop
+  endif
+else (no)
+  :Display out of stock message;
+  stop
+endif
+
+@enduml

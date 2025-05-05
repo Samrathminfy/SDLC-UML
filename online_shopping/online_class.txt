@@ -1,0 +1,112 @@
+@startuml
+' Set black background
+skinparam backgroundColor #5A5A5A
+
+' Set all class-related styles
+skinparam class {
+    BackgroundColor #1e1e1e
+    BorderColor white
+}
+
+' Set styles for notes
+skinparam note {
+    BackgroundColor #ffffff
+    BorderColor white
+    FontColor white
+}
+
+' Set global font color for other elements (relationships, inheritance arrows, etc.)
+skinparam defaultFontColor black
+skinparam ArrowColor black
+
+skinparam handwritten false
+skinparam shadowing false
+
+skinparam class {
+    BackgroundColor #f0f0f0
+    BorderColor black
+    FontColor black
+}
+
+
+
+' Define the classes and their attributes and methods
+class Customer {
+    - customerID: String
+    - name: String
+    - email: String
+    - address: String
+    + viewProducts(): List<Product>
+    + addToCart(product: Product): void
+    + checkout(): void
+}
+
+class Product {
+    - productID: String
+    - name: String
+    - description: String
+    - price: float
+    - stockQuantity: int
+    + updateStock(quantity: int): void
+    + getPrice(): float
+}
+
+class Order {
+    - orderID: String
+    - orderDate: Date
+    - totalAmount: float
+    - orderStatus: String
+    + addProduct(product: Product, quantity: int): void
+    + calculateTotal(): float
+    + updateStatus(status: String): void
+}
+
+class ShoppingCart {
+    - cartID: String
+    - items: List<Product>
+    - totalAmount: float
+    + addItem(product: Product, quantity: int): void
+    + removeItem(product: Product): void
+    + calculateTotal(): float
+}
+
+class Payment {
+    - paymentID: String
+    - paymentAmount: float
+    - paymentStatus: String
+    - paymentDate: Date
+    + processPayment(): boolean
+    + verifyPayment(): boolean
+}
+
+class Shipment {
+    - shipmentID: String
+    - shipmentDate: Date
+    - deliveryStatus: String
+    - deliveryAddress: String
+    + trackShipment(): String
+    + updateStatus(status: String): void
+}
+
+class Admin {
+    - adminID: String
+    - username: String
+    - password: String
+    + addProduct(product: Product): void
+    + removeProduct(product: Product): void
+    + viewOrders(): List<Order>
+}
+
+' Define the relationships
+Customer o-- Order : places
+Customer o-- ShoppingCart : owns
+ShoppingCart o--  Product : contains
+Order o-- Payment : paidBy
+Order o-- Shipment : shippedBy
+Admin o--  Product : manages
+
+note left of Customer
+  © samrath
+end note
+
+@enduml

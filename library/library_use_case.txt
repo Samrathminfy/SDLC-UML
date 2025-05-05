@@ -1,0 +1,55 @@
+@startuml
+
+' Set dark background
+skinparam backgroundColor #5A5A5A
+
+skinparam note {
+    BackgroundColor #1e1e1e
+    BorderColor white
+    FontColor white
+}
+
+' Style use cases and actors
+skinparam usecase {
+    BackgroundColor #1e1e1e
+    BorderColor white
+    FontColor white
+}
+
+skinparam actor {
+    BackgroundColor #1e1e1e
+    BorderColor white
+    FontColor white
+}
+
+' Global font and arrow color
+skinparam defaultFontColor white
+skinparam ArrowColor white
+skinparam handwritten false
+skinparam shadowing false
+
+' Actors
+actor Member as M
+actor Librarian as L
+
+' Use Cases
+usecase "Borrow Book" as UC1
+usecase "Return Book" as UC2
+usecase "Register Member" as UC3
+usecase "Add New Book" as UC4
+
+' Relationships
+M --> UC1
+M --> UC2
+
+L --> UC1
+L --> UC2
+L --> UC3
+L --> UC4
+
+' Watermark: attach note to an actual element
+note right of L
+  © samrath
+end note
+
+@enduml
